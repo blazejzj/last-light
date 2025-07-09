@@ -1,0 +1,49 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "public",
+        "public/assets",
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "public/assets/map.json": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1435,
+                "y": 1558.5
+            }
+        },
+        "public/assets/map.json#tileset-first-test": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset-first-test.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/home/blazejzj/repos/last-light/public/assets",
+    "last.imagePath": "/home/blazejzj/repos/last-light/public/assets",
+    "lastUsedTilesetExportFilter": "All Files (*)",
+    "map.height": 100,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.width": 100,
+    "openFiles": [
+    ],
+    "project": "last-llight-map-project.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "tileset-first-test.tsx",
+        "public/assets/map.json"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
