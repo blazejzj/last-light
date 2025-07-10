@@ -33,6 +33,7 @@ export function createToolbar(scene: Phaser.Scene) {
             } else {
                 slots.forEach((slot, i) => {
                     slot.setFrame(i === keyNum - 1 ? 1 : 0);
+                    1234;
                 });
                 selectedSlot = keyNum - 1;
             }

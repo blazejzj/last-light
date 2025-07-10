@@ -3,12 +3,15 @@ import { createPlayer, updatePlayerMovement } from "../player/Player";
 import { createPlayerAnimations } from "../player/PlayerAnimations";
 import { createCoordText, updateCoordText } from "../ui/CoordText";
 import { createToolbar } from "../ui/Toolbar";
+import { GameClock } from "../ui/GameClock";
 
 export default class GameScene extends Phaser.Scene {
     player!: Phaser.Physics.Arcade.Sprite;
     cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
     currentDirection!: "up" | "down" | "left" | "right";
     coordText!: Phaser.GameObjects.Text;
+    gameTime = 0;
+    clock!: GameClock;
 
     preload() {
         this.load.spritesheet("playerUp", "assets/playerUp.png", {
@@ -78,10 +81,27 @@ export default class GameScene extends Phaser.Scene {
 
         // toolbar
         createToolbar(this);
+
+        // ingame clock
+        this.clock = new GameClock(this);
+        this.clock.setPosition(890, 185);
+        this.gameTime = 8 * 60;
     }
 
-    update() {
+    update(time: number, delta: number) {
         updatePlayerMovement(this.player, this.cursors, this);
         updateCoordText(this.coordText, this.player);
+
+        // ingame time
+        const minutesPerSecond = 1440 / 1200;
+        this.gameTime += (delta / 1000) * minutesPerSecond;
+
+        if (this.gameTime >= 1440) {
+            this.gameTime = 0;
+        }
+
+        const hours = Math.floor(this.gameTime / 60);
+        const minutes = Math.floor(this.gameTime % 60);
+        this.clock.update(hours, minutes);
     }
 }
