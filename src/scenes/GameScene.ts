@@ -4,6 +4,7 @@ import { createPlayerAnimations } from "../player/PlayerAnimations";
 import { createCoordText, updateCoordText } from "../ui/CoordText";
 import { createToolbar } from "../ui/Toolbar";
 import { GameClock } from "../ui/GameClock";
+import { PauseMenu } from "../ui/PauseMenu";
 
 export default class GameScene extends Phaser.Scene {
     player!: Phaser.Physics.Arcade.Sprite;
@@ -12,6 +13,7 @@ export default class GameScene extends Phaser.Scene {
     coordText!: Phaser.GameObjects.Text;
     gameTime = 0;
     clock!: GameClock;
+    pauseMenu: PauseMenu;
 
     preload() {
         this.load.spritesheet("playerUp", "assets/playerUp.png", {
@@ -86,9 +88,25 @@ export default class GameScene extends Phaser.Scene {
         this.clock = new GameClock(this);
         this.clock.setPosition(890, 185);
         this.gameTime = 8 * 60;
+
+        // pause menu
+        this.pauseMenu = new PauseMenu(this);
+        // listen for ESC -> pause
+        this.input.keyboard?.on("keydown-ESC", () => {
+            if (this.pauseMenu.container.visible) {
+                this.pauseMenu.hide();
+                this.physics.resume();
+                this.scene.resume();
+            } else {
+                this.pauseMenu.show();
+                this.physics.pause();
+            }
+        });
+        this.pauseMenu.container.setScrollFactor(0);
     }
 
     update(time: number, delta: number) {
+        if (this.pauseMenu.container.visible) return;
         updatePlayerMovement(this.player, this.cursors, this);
         updateCoordText(this.coordText, this.player);
 

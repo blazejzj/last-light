@@ -15,21 +15,31 @@ export function updatePlayerMovement(
     let newDirection = scene.currentDirection;
     let isMoving = false;
 
-    if (cursors.left.isDown) {
+    const W = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    const A = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    const S = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    const D = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+
+    const left = cursors.left.isDown || A.isDown;
+    const right = cursors.right.isDown || D.isDown;
+    const up = cursors.up.isDown || W.isDown;
+    const down = cursors.down.isDown || S.isDown;
+
+    if (left) {
         player.setVelocityX(-speed);
         newDirection = "left";
         isMoving = true;
-    } else if (cursors.right.isDown) {
+    } else if (right) {
         player.setVelocityX(speed);
         newDirection = "right";
         isMoving = true;
     }
 
-    if (cursors.up.isDown) {
+    if (up) {
         player.setVelocityY(-speed);
         newDirection = "up";
         isMoving = true;
-    } else if (cursors.down.isDown) {
+    } else if (down) {
         player.setVelocityY(speed);
         newDirection = "down";
         isMoving = true;
