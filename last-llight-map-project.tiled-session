@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "public/assets/map.json",
     "expandedProjectPaths": [
         "public",
         "public/assets",
@@ -15,11 +15,11 @@
             "scaleInDock": 1
         },
         "public/assets/map.json": {
-            "scale": 1,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1435,
-                "y": 1558.5
+                "x": 1344,
+                "y": 1762
             }
         },
         "public/assets/map.json#tileset-first-test": {
@@ -38,6 +38,8 @@
     "map.lastUsedExportFilter": "All Files (*)",
     "map.width": 100,
     "openFiles": [
+        "tileset-first-test.tsx",
+        "public/assets/map.json"
     ],
     "project": "last-llight-map-project.tiled-project",
     "property.type": "bool",
