@@ -4,7 +4,6 @@ export function createCoordText(scene: Phaser.Scene): Phaser.GameObjects.Text {
     const coordText = scene.add.text(16, 16, "", {
         font: "12px helvetica",
         color: "#fff",
-        backgroundColor: "#000",
         padding: { x: 6, y: 4 },
     });
     coordText.setScrollFactor(0);

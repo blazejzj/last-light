@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { createPlayer, updatePlayerMovement } from "../player/Player";
 import { createPlayerAnimations } from "../player/PlayerAnimations";
 import { createCoordText, updateCoordText } from "../ui/CoordText";
+import { createToolbar } from "../ui/Toolbar";
 
 export default class GameScene extends Phaser.Scene {
     player!: Phaser.Physics.Arcade.Sprite;
@@ -23,6 +24,10 @@ export default class GameScene extends Phaser.Scene {
             frameHeight: 32,
         });
         this.load.spritesheet("playerRight", "assets/playerRight.png", {
+            frameWidth: 32,
+            frameHeight: 32,
+        });
+        this.load.spritesheet("toolbar", "assets/toolbar.png", {
             frameWidth: 32,
             frameHeight: 32,
         });
@@ -68,6 +73,11 @@ export default class GameScene extends Phaser.Scene {
 
         // coordinates show
         this.coordText = createCoordText(this);
+        this.coordText.setDepth(1000);
+        this.coordText.setPosition(320, 180);
+
+        // toolbar
+        createToolbar(this);
     }
 
     update() {
