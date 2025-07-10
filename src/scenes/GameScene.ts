@@ -5,6 +5,7 @@ import { createCoordText, updateCoordText } from "../ui/CoordText";
 import { createToolbar } from "../ui/Toolbar";
 import { GameClock } from "../ui/GameClock";
 import { PauseMenu } from "../ui/PauseMenu";
+import { InventoryUI } from "../ui/Inventory";
 
 export default class GameScene extends Phaser.Scene {
     player!: Phaser.Physics.Arcade.Sprite;
@@ -14,6 +15,7 @@ export default class GameScene extends Phaser.Scene {
     gameTime = 0;
     clock!: GameClock;
     pauseMenu: PauseMenu;
+    inventory: InventoryUI;
 
     preload() {
         this.load.spritesheet("playerUp", "assets/playerUp.png", {
@@ -103,11 +105,27 @@ export default class GameScene extends Phaser.Scene {
             }
         });
         this.pauseMenu.container.setScrollFactor(0);
+
+        // create inventory
+        this.inventory = new InventoryUI(this);
+        this.input.keyboard?.on("keydown-I", () => {
+            this.inventory.toggle();
+        });
     }
 
     update(time: number, delta: number) {
-        if (this.pauseMenu.container.visible) return;
-        updatePlayerMovement(this.player, this.cursors, this);
+        if (!this.pauseMenu.container.visible && !this.inventory.isOpen) {
+            updatePlayerMovement(this.player, this.cursors, this);
+        }
+
+        if (this.inventory.isOpen) {
+            const cam = this.cameras.main;
+            this.inventory.container.x = cam.scrollX + cam.width / 2;
+            this.inventory.container.y = cam.scrollY + cam.height / 2;
+            this.inventory.overlay.x = cam.scrollX;
+            this.inventory.overlay.y = cam.scrollY;
+        }
+
         updateCoordText(this.coordText, this.player);
 
         // ingame time
